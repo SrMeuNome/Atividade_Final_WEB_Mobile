@@ -1,0 +1,138 @@
+.container
+{
+    overflow-x: hidden !important;
+    overflow-y: hidden !important;
+    margin: 0px 0px !important;
+    width: 100vw !important;
+}
+
+body
+{
+    background-color: #e3e9ff !important;
+}
+
+header, footer
+{
+    overflow-x: hidden !important;
+    overflow-y: hidden !important;
+}
+
+header
+{
+    height: 5vh !important;
+}
+
+footer
+{
+    height: 5vh !important;
+}
+
+main
+{
+    height: 75vh !important;
+    width: 100vw !important;
+    
+    overflow-x: hidden !important;
+    overflow-y: auto !important;
+}
+
+footer
+{
+    height: 10vh !important;
+    width: 100vw !important;
+}
+
+.custom-height
+{
+    height: 15vh !important;
+    padding: 0px !important;
+    margin: 0px !important;
+}
+
+.center-itens
+{
+    display: flex !important;
+    justify-content: center !important;
+    align-items: center !important;
+}
+
+.title
+{
+    font-size: 20px;
+    margin: 0px;
+}
+
+.text-list
+{
+    font-size: 18px;
+}
+
+.list-container
+{
+    justify-content: space-between !important;
+}
+
+.break-text
+{
+    word-break: break-all;
+}
+
+.space-between-right
+{
+    margin-right: 10vw;
+}
+
+.check-center::before, .check-center::after
+{
+    top: 30% !important;
+}
+
+.error
+{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    position: absolute;
+    width: 80vw;
+    height: 20vh;
+    top: calc(50% - 10vh);
+    left: calc(50% - 40vw);
+    background-color: #fff;
+    box-shadow: 0px 1px 20px 4px rgb(0, 0, 0, 0.1);
+    z-index: 5;
+    border-radius: 10%;
+}
+
+.ok-error
+{
+    position: absolute;
+    width: 15vw;
+    height: 5vh;
+    top: calc(85% - 3.5vh);
+    left: calc(85% - 7.5vw);
+    background-color: #fff;
+    color: #5555ff;
+    border-radius: 15%;
+    border: 0px;
+    box-shadow: 0px 1px 10px 1px rgb(0, 0, 0, 0.1);
+    transition: 0.3s ease-incubic-bezier(0, 1.16, 1, 1.27) ;
+}
+
+.ok-error:active
+{
+    background-color: rgb(205, 237, 255);
+    transform: scale(0.8);
+}
+
+.ok-error:focus
+{
+    background-color: rgb(205, 237, 255);
+}
+
+.text-alert
+{
+    color: #000000;
+    font-size: 12pt;
+    text-align: center;
+    word-break: break-word;
+}

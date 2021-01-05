@@ -1,0 +1,123 @@
+body
+{
+    background-color: #ddfcdd;
+}
+
+fieldset
+{
+    display: block;
+    margin-left: 2px;
+    margin-right: 2px;
+    margin-bottom: 20px;
+    padding-top: 0.35em;
+    padding-bottom: 0.625em;
+    padding-left: 0.75em;
+    padding-right: 0.75em;
+    border: 3px groove black;
+    border-radius: 5px;
+}
+
+table
+{
+    text-align: center;
+    box-shadow: 5px 2px 8px rgba(0, 0, 0, 0.3);
+}
+
+td, th
+{
+    vertical-align: middle !important;
+    text-align: center !important;
+}
+
+.title
+{
+    font-size: 2vw;
+    text-shadow: 5px 2px 8px rgba(0, 0, 0, 0.3);
+    width: auto;
+    font-weight: bold;
+}
+
+.icon
+{
+    display: inline-flex !important;
+    justify-items: center !important;
+    align-content: center !important;
+    margin-top: auto;
+    margin-bottom: auto;
+    padding: inherit;
+}
+
+
+.btn-custom-group
+{
+    justify-content: flex-end;
+}
+
+.btn-custom-group button:nth-child(odd)
+{
+    margin-right: 1vw !important;
+}
+
+.btn-circle
+{
+    border-radius: 100% !important;
+}
+
+.custom-table
+{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.main-title
+{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 92vh;
+    flex-direction: column;
+}
+
+.active
+{
+    background-color: #007700 !important;
+}
+
+.img-demo
+{
+    width: 100px !important;
+}
+
+.custom-container
+{
+    display: flex;
+    width: 99vw;
+    height: 92vh;
+    justify-content: center;
+    align-items: center;
+}
+
+.float-field-box
+{
+    height: 35vh;
+    box-shadow: 5px 2px 8px rgba(0, 0, 0, 0.3);
+}
+
+.custom-check-label
+{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.custom-check-input
+{
+    width: 5vh;
+    height: 5vh;
+}
+
+.img-logo
+{
+    width: 40vw !important;
+}

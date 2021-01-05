@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <!--<meta http-equiv="Content-Security-Policy" content="default-src 'self' data: gap: https://ssl.gstatic.com 'unsafe-eval'; style-src 'self' 'unsafe-inline'; media-src *; img-src 'self' data: content:;">-->
+    <meta name="format-detection" content="telephone=no">
+    <meta name="msapplication-tap-highlight" content="no">
+    <meta name="viewport" content="initial-scale=1, width=device-width, viewport-fit=cover">
+    <link rel="stylesheet" href="css/materialize.css">
+    <link rel="stylesheet" href="css/icons.css">
+    <link rel="stylesheet" href="css/custom.css">
+    <title>List Levels</title>
+</head>
+
+<body>
+    <div id="error" style="display: none;" class="error">
+        <p id="error-text" class="text-alert"></p><button onclick="$('#error').fadeOut('2.5s')"
+            class="ok-error waves-effect waves-light">Ok</button>
+    </div>
+    <div class="container">
+        <header class="blue darken-4 white-text center-itens">
+            <h5 class="title">Lista Telefônica</h5>
+        </header>
+
+        <div class="row center-itens custom-height">
+            <div class="col s5 input-field">
+                <input id="nome" name="nome" type="text" class="validate">
+                <label for="nome">Nome:</label>
+            </div>
+            <div class="col s5 input-field">
+                <input id="telefone" name="telefone" type="text" class="validate">
+                <label for="telefone">Telefone:</label>
+            </div>
+            <div class="col s2">
+                <a onclick="addList()" class="btn-floating btn-medium waves-effect waves-light blue"><i
+                        class="material-icons">add</i></a>
+            </div>
+        </div>
+
+        <main>
+            <ul id="list-level" class="collection">
+
+            </ul>
+        </main>
+
+        <footer class="blue darken-4"></footer>
+    </div>
+    <script src="cordova.js"></script>
+    <!--<script src="js/index.js"></script>-->
+    <script src="js/jquery.js"></script>
+    <script src="js/jquery.mask.js"></script>
+    <script src="js/materialize.js"></script>
+
+    <!-- The core Firebase JS SDK is always required and must be listed first -->
+    <script src="https://www.gstatic.com/firebasejs/8.1.1/firebase-app.js"></script>
+
+    <script src="https://www.gstatic.com/firebasejs/8.1.1/firebase-database.js"></script>
+
+    <!-- TODO: Add SDKs for Firebase products that you want to use
+            https://firebase.google.com/docs/web/setup#available-libraries -->
+
+    <script src="js/custom.js"></script>
+
+    <script>
+        $(document).ready(function () {
+            carregarLista()
+        })
+    </script>
+</body>
+
+</html>
