@@ -4,10 +4,12 @@
 <head>
     <meta charset="utf8">
     <link rel="stylesheet" href="{{asset('css/bootstrap.css')}}">
+    <link rel="stylesheet" href="{{asset('css/bootstrap-select.css')}}">
     <link rel="stylesheet" href="{{asset('css/custom.css')}}">
     <link rel="stylesheet" href="{{asset('css/icons.css')}}">
     <script src="{{asset('js/jquery.js')}}"></script>
-    <script src="{{asset('js/bootstrap.js')}}"></script>
+    <script src="{{asset('js/bootstrap.bundle.js')}}"></script>
+    <script src="{{asset('js/bootstrap-select.js')}}"></script>
     <title>@yield('nome_tela')</title>
 </head>
 

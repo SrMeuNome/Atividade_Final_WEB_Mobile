@@ -5,42 +5,30 @@
 @section('cadastro')
     <div class="container">
         <form class="row" method="POST" action="/aluno">
-            <div class="form-group col-9">
+            <div class="form-group col-6">
                 <label for="nome" class="form-text">Nome do aluno:</label>
                 <input value="{{$aluno->nome}}" id="nome" name="nome" class="form-control" type="text">
             </div>
-            <div class="form-group col-3">
+            <div class="form-group col-6">
                 <label for="email" class="form-text">E-mail:</label>
                 <input value="{{$aluno->email}}" id="email" name="email" class="form-control" type="email">
             </div>
-            <div class="form-group col-3">
+            <div class="form-group col-6">
                 <label for="matricula" class="form-text">Matrícula:</label>
                 <input value="{{$aluno->matricula}}" id="matricula" name="matricula" class="form-control" type="text">
             </div>
-            <!--<div class="form-group col-6">
-                <label for="clube" class="form-text">Clube:</label>
-                <select id="clube" name="clube" class="custom-select">
-                    <option></option>
-                    @#foreach ($clubes as $clube)
-                        @#if ($clube->id == $aluno->id_clube)
-                            <option selected value="{$clube->id}}">{$clube->nome}}</option>                            
-                        @#endif
-                        <option value="{$clube->id}}">{$clube->nome}}</option>
-                    @#endforeach
+            <div class="form-group col-6">
+                <label for="turma" class="form-text">Turmas:</label>
+                <select id="turma" name="turma[]" class="form-control" required multiple>
+                    @foreach ($turmas as $turma)
+                        @if ($alunoAux->contemTurma($aluno->id, $turma->id))
+                            <option value="{{$turma->id}}" selected >{{$turma->nome}}</option>
+                        @else
+                            <option value="{{$turma->id}}">{{$turma->nome}}</option>
+                        @endif 
+                    @endforeach
                 </select>
             </div>
-            <div class="form-group col-3">
-                <label for="matricula" class="form-text">Posição:</label>
-                <select id="matricula" name="posicao" class="custom-select">
-                    <option></option>
-                    @#foreach ($posicoes as $posicao)
-                        @#if ($posicao->id == $aluno->id_posicao)
-                            <option selected value="{$posicao->id}}">{$posicao->nome}}</option>                            
-                        @#endif
-                        <option value="{$posicao->id}}">{$posicao->nome}}</option>
-                    @#endforeach
-                </select>
-            </div>-->
             <input type="hidden" id="id" name="id" value="{{$aluno->id}}">
             @csrf
             <div class="form-inline col-12 btn-custom-group">
@@ -49,6 +37,12 @@
             </div>
         </form>
     </div>
+
+    <script>
+        $(document).ready(function() {
+            $("#turma").selectpicker("refresh")
+        });
+    </script>
 @endsection
 
 @section('listagem')
@@ -59,6 +53,7 @@
                     <th>Nome</th>
                     <th>E-mail</th>
                     <th>Matrícula</th>
+                    <th>Turmas</th>
                     <th>Editar</th>
                     <th>Excluir</th>
                 </tr>
@@ -70,6 +65,19 @@
                         <td>{{$aluno->nome}}</td>
                         <td>{{$aluno->email}}</td>
                         <td>{{$aluno->matricula}}</td>
+                        <td>
+                            @if($alunoAux->countTurmas($aluno->id) > 0)
+                                @foreach ($turmas as $turma)
+                                    <ul>
+                                        @if ($alunoAux->contemTurma($aluno->id, $turma->id))
+                                            <li>{{$turma->nome}}</li>
+                                        @endif
+                                    </ul>
+                                @endforeach
+                            @else
+                                Não está cadastrado em turmas.
+                            @endif 
+                        </td>
                         <td>
                             <div class="btn-custom-group">
                                 <form method="GET" action="/aluno/{{$aluno->id}}/edit">

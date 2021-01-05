@@ -35,29 +35,24 @@ class FirebaseController extends Controller
     /**
      * Insert data.
      */
-    public function insert (string $caminho, object $valor)
+    public function insert(string $caminho, object $valor)
     {
-        if($valor->id == '')
-        {
-            $this->database
-            ->getReference($caminho)
-            ->push($valor);
-        }
-        else
-        {
+        if ($valor->id == '') {
+            return $this->database
+                ->getReference($caminho)
+                ->push($valor);
+        } else {
             $valorAux = new stdClass();
-            foreach($valor as $key => $aux)
-            {
-                if($key <> 'id')
-                {
+            foreach ($valor as $key => $aux) {
+                if ($key <> 'id') {
                     $valorAux->$key = $aux;
                 }
             }
             $updates = [
                 $caminho . "/" . $valor->id => $valorAux,
             ];
-    
-            $this->database->getReference()->update($updates);
+
+            return $this->database->getReference()->update($updates);
         }
     }
 
@@ -94,7 +89,7 @@ class FirebaseController extends Controller
         $testeInfo->nome = "Teste Turma 2";
         $testeInfo->curso = "Teste Curso 2";
 
-        $this::insert("turma", $testeInfo);
+        $this->insert("turma", $testeInfo);
     }
 
     /**
@@ -105,8 +100,7 @@ class FirebaseController extends Controller
     {
         $data = $this->database->getReference($caminho)->getValue();
         $objetos = [];
-        if($data)
-        {
+        if ($data) {
             foreach ($data as $_key => $values) {
                 $aux = new stdClass();
                 $aux->id = $_key;
@@ -122,9 +116,8 @@ class FirebaseController extends Controller
     public function getById(string $id, string $caminho)
     {
         $objetos = $this->getAll($caminho);
-        $objeto = array_filter($objetos, function ($objetoAux) use($id) {
-            if($objetoAux->id == $id)
-            {
+        $objeto = array_filter($objetos, function ($objetoAux) use ($id) {
+            if ($objetoAux->id == $id) {
                 return $objetoAux;
             }
         });
@@ -155,7 +148,7 @@ class FirebaseController extends Controller
      */
     public function delete(string $id, string $caminho)
     {
-        $delete = $this->database->getReference( $caminho . "/" . $id)->remove();
+        $delete = $this->database->getReference($caminho . "/" . $id)->remove();
     }
 
     /**

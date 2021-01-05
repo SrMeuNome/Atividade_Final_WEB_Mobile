@@ -6,6 +6,9 @@ use Illuminate\Http\Request;
 
 use App\Http\Controllers\FirebaseController;
 use App\Models\Aluno;
+use App\Models\Turma;
+use App\Models\Nota;
+use SebastianBergmann\Environment\Console;
 
 class AlunoController extends Controller
 {
@@ -18,10 +21,20 @@ class AlunoController extends Controller
     {
         $firebase = new FirebaseController();
         $aluno = new Aluno();
+        $alunoAuxi = new Aluno();
         $alunos = $firebase->getAll("aluno");
+        $nota = new Nota();
+        $notas = $firebase->getAll("nota");
+        $turma = new Turma();
+        $turmas = $firebase->getAll("turma");
         return view("aluno.index", [
             "aluno" => $aluno,
-            "alunos" => $alunos
+            "alunos" => $alunos,
+            "alunoAux" => $alunoAuxi,
+            "nota" => $nota,
+            "notas" => $notas,
+            "turma" => $turma,
+            "turmas" => $turmas
         ]);
     }
 
@@ -65,7 +78,28 @@ class AlunoController extends Controller
         $aluno->nome = $request->post('nome');
         $aluno->email = $request->post('email');
         $aluno->matricula = $request->post('matricula');
-        $firebase->insert('/aluno', $aluno);
+
+        $alunoRef = $firebase->insert('/aluno', $aluno);
+
+        if ($request->post('id') == '') {
+            $alunoKey = $alunoRef->getKey();
+        } else {
+            $alunoKey = $request->post('id');
+        }
+
+        echo '<script>';
+        echo 'console.log(' . $alunoKey . ')';
+        echo '</script>';
+
+        $alunoAuxi = new Aluno();
+        $alunoAuxi->limparTurmas($alunoKey);
+        $nota = new Nota();
+        foreach ($request->post('turma') as $turma) {
+            $nota->aluno = $alunoKey;
+            $nota->turma = $turma;
+            $firebase->insert('/nota', $nota);
+        }
+
         $request->session()->flash('salvar', 'Aluno salvo com sucesso!');
         return redirect('/aluno');
     }
@@ -91,10 +125,20 @@ class AlunoController extends Controller
     {
         $firebase = new FirebaseController();
         $aluno = $firebase->getById($id, "aluno");
+        $alunoAuxi = new Aluno();
         $alunos = $firebase->getAll("aluno");
+        $nota = new Nota();
+        $notas = $firebase->getAll("nota");
+        $turma = new Turma();
+        $turmas = $firebase->getAll("turma");
         return view("aluno.index", [
             "aluno" => $aluno,
             "alunos" => $alunos,
+            "alunoAux" => $alunoAuxi,
+            "nota" => $nota,
+            "notas" => $notas,
+            "turma" => $turma,
+            "turmas" => $turmas
         ]);
     }
 
