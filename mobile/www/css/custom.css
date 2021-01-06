@@ -10,7 +10,7 @@ body
 {
     background-color: #ffffff !important;
     overflow-x: hidden !important;
-    overflow-y: hidden !important;
+    overflow-y: auto !important;
 }
 
 header, footer
@@ -24,14 +24,9 @@ header
     height: 5vh !important;
 }
 
-footer
-{
-    height: 5vh !important;
-}
-
 main
 {
-    height: 89vh !important;
+    height: 90vh !important;
     width: 100vw !important;
     
     overflow-x: hidden !important;
@@ -40,7 +35,7 @@ main
 
 footer
 {
-    height: 10vh !important;
+    height: 5vh !important;
     width: 100vw !important;
 }
 

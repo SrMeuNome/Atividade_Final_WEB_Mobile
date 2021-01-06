@@ -65,7 +65,7 @@ class NotaController extends Controller
             $nota = $firebase->getById($request->post('nota-id'), "nota");
         }
         $nota->aluno = $request->post('aluno');
-        $nota->materia = $request->post('turma-id');
+        $nota->turma = $request->post('turma-id');
         $nota->nota = $request->post('nota');
 
         $firebase->insert('/nota', $nota);

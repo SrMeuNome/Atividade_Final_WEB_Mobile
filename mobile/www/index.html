@@ -18,29 +18,44 @@
         <p id="error-text" class="text-alert"></p><button onclick="$('#error').fadeOut('2.5s')"
             class="ok-error waves-effect waves-light">Ok</button>
     </div>
-    <div class="container">
+    <div id="c1" class="container">
         <header class="green darken-4 white-text center-itens">
             <h5 class="title">Login</h5>
         </header>
+
+        <main>
+            <img class="responsive-img" src="./img/logo.png">
+            <div class="row center-itens bottom-float">
+                <div class="col s8 input-field">
+                    <input id="matricula" name="matricula" type="text" class="validate">
+                    <label for="matricula">Matricula</label>
+                </div>
+                <div class="col s3 center-itens">
+                    <a onclick="makeLogin()" class="btn-floating btn-medium waves-effect waves-light green">
+                        <i class="material-icons">login</i>
+                    </a>
+                </div>
+            </div>
+        </main>
+
+        <footer class="green darken-4"></footer>
+
     </div>
 
-    <main>
-        <img class="responsive-img" src="./img/logo.png">
-        <div class="row center-itens bottom-float">
-            <div class="col s8 input-field">
-                <input id="matricula" name="matricula" type="text" class="validate">
-                <label for="matricula">Matricula</label>
-            </div>
-            <div class="col s3 center-itens">
-                <a onclick="makeLogin()" class="btn-floating btn-medium waves-effect waves-light green">
-                    <i class="material-icons">login</i>
-                </a>
-            </div>
-        </div>
-    </main>
+    <div id="c2" class="container">
+        <header class="green darken-4 white-text center-itens">
+            <h5 id="user" class="title"></h5>
+        </header>
 
-    <footer class="green darken-4"></footer>
+        <main>
+            <ul id="list-nota" class="collection">
+
+            </ul>
+        </main>
+
+        <footer class="green darken-4"></footer>
     </div>
+
     <script src="cordova.js"></script>
     <!--<script src="js/index.js"></script>-->
     <script src="js/jquery.js"></script>
@@ -56,6 +71,13 @@
             https://firebase.google.com/docs/web/setup#available-libraries -->
 
     <script src="js/custom.js"></script>
+
+    <script>
+        $(document).ready(function () {
+            $('#c1').toggle(true)
+            $('#c2').toggle(false)
+        })
+    </script>
 </body>
 
 </html>

@@ -11,52 +11,72 @@ var firebaseConfig = {
 // Initialize Firebase
 firebase.initializeApp(firebaseConfig);
 
-var listaDB = firebase.database().ref('aluno')
+var database = firebase.database()
 
+var listaAlunos = database.ref('aluno')
+var listaMaterias = database.ref('materia')
+var listaNotas = database.ref('nota')
 
-var list = []
+var nome
+var notas = []
 
 const makeLogin = () => {
+    var id = ''
+    var nome = ''
     let matricula = $('#matricula').val()
-    listaDB.on('value', function (itens) {
+    listaAlunos.on('value', function (itens) {
+        let id
         itens.forEach(function (item, index) {
-            if (item.val().matricula == matricula) {
-                window.location.replace('../notas.html')
-                return true
+            if (item.val().matricula === matricula) {
+                id = item.key
+                nome = item.val().nome
+                $('#c1').toggle(false)
+                $('#c2').toggle(true)
+                $('#user').html(nome)
+                return
             }
         })
-        msgAlert("Você não está cadastrado no sistema!")
-        return false
+        if (nome === '') {
+            msgAlert("Você não está cadastrado no sistema!")
+        }
+        else {
+            carregarDados(id)
+        }
     })
 }
 
-const carregarLista = () => {
-    list = []
-    value = {}
-    listaDB.on('value', function (itens) {
+const carregarDados = (id) => {
+    listaNotas.on('value', function (itens) {
         itens.forEach(function (item, index) {
-            value = { id: item.key, nome: item.val().nome, telefone: item.val().telefone }
-            list.push(value)
+            if (item.val().aluno === id) {
+                notas.push({ aluno: item.val().aluno, turma: item.val().turma, nota: item.val().nota })
+            }
         })
-        refleshList()
+        listaMaterias.on('value', function (itens) {
+            itens.forEach(function (item) {
+                alert("Estou aqui")
+                let index = notas.findIndex(element => element.turma === item.key)
+                if (typeof (index) !== undefined) {
+                    notas[index].turma = item.val().nome
+                    alert(item.val().nome)
+                }
+            })
+            showNotas()
+        })
     })
 }
 
-const refleshList = () => {
+const showNotas = () => {
     var listHTML = []
-    var checked = ''
-    list.forEach(function (value, index) {
+    notas.forEach(function (value, index) {
         listHTML.push(`<li id="${index}" class="collection-item">
         <div class="list-container">
-            <b>Nome:</b> ${value.nome}<br>
-            <a onclick="deleteList(${index})" class=" secondary-content">
-                <i class="material-icons blue-text">clear</i>
-            </a><br>
-            <b>Telefone:</b> ${value.telefone}
+            <b>Matéria:</b> ${value.turma}<br>
+            <b>Nota:</b> ${value.nota}
         </div>
     </li >`)
     })
-    $('#list-level').html(listHTML);
+    $('#list-nota').html(listHTML);
 }
 
 const msgAlert = (text) => {
@@ -94,26 +114,3 @@ const addList = () => {
         carregarLista()
     }
 }
-
-const deleteList = (id) => {
-    listaDB.child(list[id].id).remove((a) => {
-        if (a) {
-            msgAlert("Ocorreu um erro ao deletar um item, verifique sua conexão!")
-        }
-    })
-    carregarLista()
-}
-
-//A regexp /\D/g em conjunto com o replace, está anulando todo caractere não numerico
-//\D representa todo caractere não numerico
-
-var maskFunc = function (val) {
-    return val.replace(/\D/g, '').length === 11 ? '(00) 0.0000-0000' : '(00) 0000-00009';
-},
-    maskFuncOptions = {
-        onKeyPress: function (val, e, field, options) {
-            field.mask(maskFunc.apply({}, arguments), options);
-        }
-    };
-
-$('#telefone').mask(maskFunc, maskFuncOptions)
