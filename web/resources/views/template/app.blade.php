@@ -10,6 +10,7 @@
     <script src="{{asset('js/jquery.js')}}"></script>
     <script src="{{asset('js/bootstrap.bundle.js')}}"></script>
     <script src="{{asset('js/bootstrap-select.js')}}"></script>
+    <script src="{{asset('js/custom.js')}}"></script>
     <title>@yield('nome_tela')</title>
 </head>
 

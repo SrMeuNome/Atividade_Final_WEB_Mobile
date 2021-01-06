@@ -8,7 +8,6 @@ use App\Http\Controllers\FirebaseController;
 use App\Models\Aluno;
 use App\Models\Turma;
 use App\Models\Nota;
-use SebastianBergmann\Environment\Console;
 
 class AlunoController extends Controller
 {
@@ -87,17 +86,16 @@ class AlunoController extends Controller
             $alunoKey = $request->post('id');
         }
 
-        echo '<script>';
-        echo 'console.log(' . $alunoKey . ')';
-        echo '</script>';
-
-        $alunoAuxi = new Aluno();
-        $alunoAuxi->limparTurmas($alunoKey);
-        $nota = new Nota();
-        foreach ($request->post('turma') as $turma) {
-            $nota->aluno = $alunoKey;
-            $nota->turma = $turma;
-            $firebase->insert('/nota', $nota);
+        if ($request->post('id') == '') {
+            $alunoAuxi = new Aluno();
+            $alunoAuxi->limparTurmas($alunoKey);
+            $nota = new Nota();
+            foreach ($request->post('turma') as $turma) {
+                $nota->aluno = $alunoKey;
+                $nota->turma = $turma;
+                $nota->nota = 0;
+                $firebase->insert('/nota', $nota);
+            }
         }
 
         $request->session()->flash('salvar', 'Aluno salvo com sucesso!');

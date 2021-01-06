@@ -156,6 +156,6 @@ class FirebaseController extends Controller
      */
     public function deleteAll(string $caminho)
     {
-        $this->database->getReference('blog/posts')->remove();
+        $this->database->getReference($caminho)->remove();
     }
 }

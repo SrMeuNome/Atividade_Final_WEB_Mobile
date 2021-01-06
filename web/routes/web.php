@@ -3,7 +3,7 @@
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\TurmaController;
 use App\Http\Controllers\AlunoController;
-use App\Http\Controllers\JogadorController;
+use App\Http\Controllers\NotaController;
 use App\Http\Controllers\FirebaseController;
 
 /*
@@ -20,7 +20,7 @@ use App\Http\Controllers\FirebaseController;
 Route::resources([
     "turma" => TurmaController::class,
     "aluno" => AlunoController::class,
-    "jogador" => JogadorController::class
+    "nota" => NotaController::class
 ]);
 
 Route::get('/', function () {
