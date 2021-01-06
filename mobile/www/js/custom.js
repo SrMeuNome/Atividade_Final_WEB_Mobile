@@ -1,20 +1,34 @@
 // Your web app's Firebase configuration
 var firebaseConfig = {
-    apiKey: "AIzaSyCbD2ZWPs1Vd7itx_S_DlZbHNMM_C5eg2g",
-    authDomain: "prova1-pdm.firebaseapp.com",
-    databaseURL: "https://prova1-pdm.firebaseio.com",
-    projectId: "prova1-pdm",
-    storageBucket: "prova1-pdm.appspot.com",
-    messagingSenderId: "25622153019",
-    appId: "1:25622153019:web:9de2a116eff569e6f0991e"
+    apiKey: "AIzaSyDuLYIHPh9drkC0Rxhb53maCKT--qKSKUs",
+    authDomain: "atividadefinal-ac78d.firebaseapp.com",
+    databaseURL: "https://atividadefinal-ac78d-default-rtdb.firebaseio.com",
+    projectId: "atividadefinal-ac78d",
+    storageBucket: "atividadefinal-ac78d.appspot.com",
+    messagingSenderId: "124885668186",
+    appId: "1:124885668186:web:a8a0565b9a69c6717ae363"
 };
 // Initialize Firebase
 firebase.initializeApp(firebaseConfig);
 
-var listaDB = firebase.database().ref('lista')
+var listaDB = firebase.database().ref('aluno')
 
 
 var list = []
+
+const makeLogin = () => {
+    let matricula = $('#matricula').val()
+    listaDB.on('value', function (itens) {
+        itens.forEach(function (item, index) {
+            if (item.val().matricula == matricula) {
+                window.location.replace('../notas.html')
+                return true
+            }
+        })
+        msgAlert("Você não está cadastrado no sistema!")
+        return false
+    })
+}
 
 const carregarLista = () => {
     list = []

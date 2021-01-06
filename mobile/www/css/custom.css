@@ -8,7 +8,9 @@
 
 body
 {
-    background-color: #e3e9ff !important;
+    background-color: #ffffff !important;
+    overflow-x: hidden !important;
+    overflow-y: hidden !important;
 }
 
 header, footer
@@ -29,17 +31,23 @@ footer
 
 main
 {
-    height: 75vh !important;
+    height: 89vh !important;
     width: 100vw !important;
     
     overflow-x: hidden !important;
-    overflow-y: auto !important;
+    overflow-y: hidden !important;
 }
 
 footer
 {
     height: 10vh !important;
     width: 100vw !important;
+}
+
+img.responsive-img
+{
+    margin-top: 10vh !important;
+    margin-bottom: 15vh !important;
 }
 
 .custom-height
@@ -85,6 +93,11 @@ footer
 .check-center::before, .check-center::after
 {
     top: 30% !important;
+}
+
+.bottom-float
+{
+    float: inline-end;
 }
 
 .error
