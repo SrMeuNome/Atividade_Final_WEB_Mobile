@@ -25,7 +25,7 @@ class Aluno
         return $turmasList;
     }
 
-    public function listaNotas($idAluno)
+    public function listaNotasid($idAluno)
     {
         $firebase = new FirebaseController();
         $notas = $firebase->getAll("nota");
@@ -34,6 +34,20 @@ class Aluno
         foreach ($notas as $nota) {
             if ($nota->aluno == $idAluno) {
                 array_push($notasList, $nota->id);
+            }
+        }
+        return $notasList;
+    }
+
+    public function listaNotas($idAluno)
+    {
+        $firebase = new FirebaseController();
+        $notas = $firebase->getAll("nota");
+        $notasList = [];
+
+        foreach ($notas as $nota) {
+            if ($nota->aluno == $idAluno) {
+                array_push($notasList, $nota);
             }
         }
         return $notasList;
@@ -60,7 +74,7 @@ class Aluno
     public function limparTurmas($idAluno)
     {
         $firebase = new FirebaseController();
-        $notasLista = $this->listaNotas($idAluno);
+        $notasLista = $this->listaNotasid($idAluno);
 
         if (gettype($notasLista) == "array") {
             foreach ($notasLista as $nota) {

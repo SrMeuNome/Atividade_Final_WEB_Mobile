@@ -96,6 +96,22 @@ class AlunoController extends Controller
                 $nota->nota = 0;
                 $firebase->insert('/nota', $nota);
             }
+        } else {
+            $alunoAuxi = new Aluno();
+            $nota = new Nota();
+            $notas = $alunoAuxi->listaNotas($alunoKey);
+            $alunoAuxi->limparTurmas($alunoKey);
+            foreach ($request->post('turma') as $turma) {
+                $nota->aluno = $alunoKey;
+                $nota->turma = $turma;
+                $nota->nota = 0;
+                foreach ($notas as $notaAuxi) {
+                    if ($nota->aluno == $notaAuxi->aluno && $nota->turma == $notaAuxi->turma) {
+                        $nota->nota = $notaAuxi->nota;
+                    }
+                }
+                $firebase->insert('/nota', $nota);
+            }
         }
 
         $request->session()->flash('salvar', 'Aluno salvo com sucesso!');

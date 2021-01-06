@@ -14,7 +14,7 @@ firebase.initializeApp(firebaseConfig);
 var database = firebase.database()
 
 var listaAlunos = database.ref('aluno')
-var listaMaterias = database.ref('materia')
+var listaMaterias = database.ref('turma')
 var listaNotas = database.ref('nota')
 
 var nome
@@ -52,17 +52,15 @@ const carregarDados = (id) => {
                 notas.push({ aluno: item.val().aluno, turma: item.val().turma, nota: item.val().nota })
             }
         })
-        listaMaterias.on('value', function (itens) {
-            itens.forEach(function (item) {
-                alert("Estou aqui")
-                let index = notas.findIndex(element => element.turma === item.key)
-                if (typeof (index) !== undefined) {
-                    notas[index].turma = item.val().nome
-                    alert(item.val().nome)
-                }
-            })
-            showNotas()
+    })
+    listaMaterias.on('value', function (itens) {
+        itens.forEach(function (item) {
+            let index = notas.findIndex(element => element.turma === item.key)
+            if (typeof (index) !== undefined && index >= 0) {
+                notas[index].turma = item.val().nome
+            }
         })
+        showNotas()
     })
 }
 
